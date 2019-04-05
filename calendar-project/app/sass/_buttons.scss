@@ -1,0 +1,40 @@
+@import "variables";
+
+.custom-button {
+  max-width: 150px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: rgb(30, 107, 232);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: $margin-25;
+}
+.search-btn {
+  display: block;
+  background: url("../src/icons/search-solid.svg");
+  -webkit-background-size: cover;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  margin: $margin-25;
+}
+.calendar-today-btn {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #808080;
+  text-transform: capitalize;
+  border: 1px solid #c9c9c9;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+

@@ -1,0 +1,18 @@
+.container {
+  max-width: 992px;
+  width: 100%;
+  margin: auto;
+}
+.d-flex {
+  display: flex;
+  &.flex-column {
+    flex-direction: column;
+  }
+}
+.custom-input {
+  padding: 10px;
+  border: 1px solid #808080;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}

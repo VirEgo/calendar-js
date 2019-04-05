@@ -1,0 +1,239 @@
+.container {
+  max-width: 992px;
+  width: 100%;
+  margin: auto; }
+
+.d-flex {
+  display: flex; }
+  .d-flex.flex-column {
+    flex-direction: column; }
+
+.custom-input {
+  padding: 10px;
+  border: 1px solid #808080;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+.custom-button {
+  max-width: 150px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #1e6be8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem; }
+
+.search-btn {
+  display: block;
+  background: url("../src/icons/search-solid.svg");
+  -webkit-background-size: cover;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  margin: 0.25rem; }
+
+.calendar-today-btn {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #808080;
+  text-transform: capitalize;
+  border: 1px solid #c9c9c9;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 2px 5px; }
+
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url("../fonts/Montserrat/montserrat-bold-webfont.woff2") format("woff2"), url("../fonts/Montserrat/montserrat-bold-webfont.woff") format("woff"), url("../fonts/Montserrat/montserrat-bold-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat-Light';
+  src: url("../fonts/Montserrat/montserrat-light-webfont.woff2") format("woff2"), url("../fonts/Montserrat/montserrat-light-webfont.woff") format("woff"), url("../fonts/Montserrat/montserrat-light-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../fonts/Montserrat/montserrat-regular-webfont.woff2") format("woff2"), url("../fonts/Montserrat/montserrat-regular-webfont.woff") format("woff"), url("../fonts/Montserrat/montserrat-regular-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat-Medium';
+  src: url("../fonts/Montserrat/montserrat-medium-webfont.woff2") format("woff2"), url("../fonts/Montserrat/montserrat-medium-webfont.woff") format("woff"), url("../fonts/Montserrat/montserrat-medium-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  transition: all .5s ease-in; }
+
+ul li {
+  list-style: none; }
+  ul li a {
+    text-decoration: none; }
+
+a {
+  text-decoration: none;
+  color: #808080;
+  font-size: 1rem; }
+  a:hover {
+    color: #85e2ff; }
+
+body {
+  position: relative; }
+
+.header-wrapper {
+  background-color: #eee;
+  border-bottom: 2px solid #808080; }
+
+.calendar-header {
+  justify-content: space-between;
+  min-height: 4rem;
+  padding: 1rem 0; }
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start; }
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .search-wrapper a img {
+    width: 20px;
+    height: 20px; }
+
+.calendar-body .month-switcher {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .calendar-body .month-switcher svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #c9c9c9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin: .5rem; }
+  .calendar-body .month-switcher .month-name {
+    font-size: 1rem;
+    text-transform: capitalize;
+    color: #808080; }
+    .calendar-body .month-switcher .month-name .year-value {
+      padding: 0 5px; }
+
+.calendar-body .calendar-title {
+  margin: 2rem 0;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; }
+
+.month-week {
+  display: flex; }
+  .month-week .month-day {
+    width: 14.2%;
+    max-height: 200px;
+    height: 100px;
+    border: 1px solid #808080;
+    padding: .3rem;
+    color: #808080; }
+    .month-week .month-day .day-name {
+      font-size: 10px; }
+    .month-week .month-day .day-number {
+      font-size: 10px; }
+
+.calendar {
+  width: 100%; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  font-weight: bold; }
+  table td,
+  table th {
+    border: 1px solid #e7e7f7;
+    text-align: center;
+    cursor: pointer;
+    width: 14.2%;
+    height: 130px; }
+    table td:hover,
+    table th:hover {
+      background-color: rgba(71, 182, 230, 0.5);
+      color: #fff; }
+  table th {
+    color: #fff;
+    font-size: 1.5rem;
+    height: 50px;
+    font-weight: bold;
+    background-color: rgba(224, 38, 38, 0.5); }
+
+.bg-info {
+  background-color: rgba(22, 180, 241, 0.3);
+  color: #fff; }
+
+.currentDate {
+  width: 10rem;
+  text-align: center; }
+
+.task-popup {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5); }
+  .task-popup .task-description {
+    font-size: 1rem;
+    color: #eee; }
+  .task-popup .popup-row {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; }
+
+.popup-hidden {
+  visibility: visible;
+  display: block; }
+
+.task-input {
+  padding: 10px 20px;
+  min-width: 150px;
+  width: 250px;
+  height: 40px;
+  border: 1px solid #808080;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin: .5rem; }
+
+.highlight {
+  background-color: red; }

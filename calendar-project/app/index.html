@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="css/main.css">
+<!--    <script src="js/calendar.js"></script>-->
+<!--    <script src="js/new-calendar.js"></script>-->
+</head>
+<body>
+<div class="header-wrapper">
+    <div class="container">
+        <div class="calendar-wrapper">
+            <header class="calendar-header d-flex ">
+                <div class="btn-wrapper">
+                    <a href="#" class="custom-button">Добавить</a>
+                    <a href="#" class="custom-button">Обновить</a>
+                </div>
+                <div class="search-wrapper">
+                    <a href="" class="search-btn"><img src="src/icons/search-solid.svg" alt=""></a>
+                    <input class="custom-input" type="text" placeholder="Событие, дата или учасник">
+                </div>
+
+            </header>
+        </div>
+    </div>
+</div>
+<div class="calendar-body">
+    <div class="container">
+        <div class="calendar-title d-flex">
+            <div class="month-switcher">
+                <a href="#" class="month-prev" id="previous" onclick="previous()">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-left" class="svg-inline--fa fa-caret-left fa-w-6" role="img" viewBox="0 0 192 512"><path fill="currentColor" d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"/></svg>
+                </a>
+                <h3 class="currentDate" id="monthAndYear"></h3>
+                <a href="#" class="month-next" id="next" onclick="next()"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6" role="img" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"/></svg></a>
+            </div>
+            <a href="#" class="calendar-today-btn">cегодня</a>
+        </div>
+
+<!--        <button onclick="createCalendar()">create</button>-->
+        <div class="calendar">
+            <table id="calendar">
+               <thead>
+               <tr>
+                   <th>Пн</th>
+                   <th>Вт</th>
+                   <th>Ср</th>
+                   <th>Чт</th>
+                   <th>Пн</th>
+                   <th>Сб</th>
+                   <th>Вс</th>
+               </tr>
+               </thead>
+               <tbody id="calendar-body">
+
+               </tbody>
+           </table>
+        </div>
+        <div class="task-popup" id="task-popup">
+            <div class="popup-row">
+                <input class="task-input" type="text" placeholder="Write your task here: ">
+                <h3 class="task-description">
+                    Press "Enter" button to add task!
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/new-calendar.js" ></script>
+</body>
+</html>
