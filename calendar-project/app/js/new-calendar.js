@@ -31,7 +31,7 @@ function previous() {
 function showCalendar(month, year) {
 
     let firstDay = (new Date(year, month)).getDay();
-    console.log(firstDay)
+    // console.log(firstDay)
 
     table = document.getElementById("calendar-body"); // body of the calendar
 
@@ -62,40 +62,46 @@ function showCalendar(month, year) {
 
             else {
                 cell = document.createElement("td");
-                cellText = document.createTextNode(date);
+                cellTextCurrent = document.createTextNode(date);
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("bg-info");
                 } // color today's date
-                cell.appendChild(cellText);
+                cell.appendChild(cellTextCurrent);
                 row.appendChild(cell);
                 date++;
             }
-
-
         }
-
         table.appendChild(row); // appending each row into calendar body.
     }
-    var selectedTd;
+    // var selectedTd = todayDay;
 
 
 
     table.onclick = function(event) {
-        var target = event.target; // где был клик?
+        var target = event.target;
+        let task = new Task(prompt("Name"), today.getDate(), today.getDay()+1);
+        console.log(cellTextCurrent);
+        
+        if(task.id == (today.getDay()+1)){
+            console.log( cellTextCurrent);
+            localStorage.setItem(task.name, task.id);
+        } else {
+
+        }
 
         if (target.tagName != 'TD') {
             selectedTd.classList.remove('highlight');
-        } // не на TD? тогда не интересует
-
-        highlight(target); // подсветить TD
+        }
+        highlight(target);
     };
 
     function highlight(node) {
         if (selectedTd) {
             selectedTd.classList.remove('highlight');
+        } else {
+            selectedTd = node;
+            selectedTd.classList.add('highlight');
         }
-        selectedTd = node;
-        selectedTd.classList.add('highlight');
     }
 
 }
@@ -107,4 +113,10 @@ function daysInMonth(iMonth, iYear) {
 var table = document.getElementById("calendar"); // body of the calendar
 function createTask(){
 
+}
+
+function Task(name, date, id) {
+    this.name = name;
+    this.date = date;
+    this.id = id;
 }
