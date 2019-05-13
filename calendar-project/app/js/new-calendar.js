@@ -73,9 +73,7 @@ var idPart = today.getFullYear();
 table.onclick = function(event) {
     var target = event.target;
     currentTdValue = parseInt(target.innerHTML);
-    if (target.tagName != 'TD') {
-        return;
-    } else {
+    if (target.tagName == 'TD') {
         taskCount++;
         spanCounter.innerHTML = taskCount;
         task = new Task(prompt("Name"), today, (idPart + currentTdValue));
@@ -94,8 +92,9 @@ table.onclick = function(event) {
             console.log("Error");
         }
         console.log(tasksArray);
-
-    
+    } else {
+       var nextTable = document.getElementById("table");
+       console.log("Click");
     }
 };
     
