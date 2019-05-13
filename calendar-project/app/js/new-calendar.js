@@ -75,34 +75,54 @@ function showCalendar(month, year) {
     }
     // var selectedTd = todayDay;
 
+    var td = document.querySelectorAll("td");
+    var taskCount = 0;
+    var spanCounter = document.createElement('span');
+    spanCounter.className = "counter";
 
+    var tasksArray = [];
+    var task = new Task();
+    var currentTdValue;
+    
+    for(let i = 0; i < td.length; i++) {
+        td[i].addEventListener('click', function () {
+            currentTdValue = this.innerHTML;
+            taskCount++;
+            spanCounter.innerHTML = taskCount;
+            task = new Task(prompt("Name"), this.innerHTML, today.getDay());
+            tasksArray.push(task);
+            this.classList.add("task-true");
+            this.appendChild(spanCounter);
 
+            if(task.id == (today.getDay())){
+                localStorage.setItem(task.name, task.id);
+                this.setAttribute(id, task.id);
+                console.log( this.setAttribute(id, task.id));
+            } else {
+                console.log("Error");
+            }
+            console.log(tasksArray);
+        });
+
+    }
+    
     table.onclick = function(event) {
         var target = event.target;
-        let task = new Task(prompt("Name"), today.getDate(), today.getDay()+1);
-        console.log(cellTextCurrent);
         
-        if(task.id == (today.getDay()+1)){
-            console.log( cellTextCurrent);
-            localStorage.setItem(task.name, task.id);
-        } else {
-
-        }
-
+        
         if (target.tagName != 'TD') {
             selectedTd.classList.remove('highlight');
         }
-        highlight(target);
     };
 
-    function highlight(node) {
-        if (selectedTd) {
-            selectedTd.classList.remove('highlight');
-        } else {
-            selectedTd = node;
-            selectedTd.classList.add('highlight');
-        }
-    }
+    // function highlight(node) {
+    //     if (selectedTd) {
+    //         selectedTd.classList.remove('highlight');
+    //     } else {
+    //         selectedTd = node;
+    //         selectedTd.classList.add('highlight');
+    //     }
+    // }
 
 }
 

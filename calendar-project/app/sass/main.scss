@@ -29,6 +29,7 @@ a{
 }
 body {
   position: relative;
+  height: 100vh;
 }
 .header-wrapper {
   background-color: #eee;
@@ -195,6 +196,25 @@ table {
 .highlight {
   background-color: red;
 }
+td {
+  position: relative;
+  .counter {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 15px;
+    height: 15px;
+    background-color: #E34713;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+}
+
 
 
 
