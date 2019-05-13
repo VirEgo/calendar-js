@@ -3,6 +3,7 @@ currentMonth = today.getMonth();
 currentYear = today.getFullYear();
 selectYear = document.getElementById("year");
 selectMonth = document.getElementById("month");
+table = document.getElementById("calendar-body");
 
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -22,27 +23,11 @@ function previous() {
     showCalendar(currentMonth, currentYear);
 }
 
-// function jump() {
-//     currentYear = parseInt(selectYear.value);
-//     currentMonth = parseInt(selectMonth.value);
-//     showCalendar(currentMonth, currentYear);
-// }
 
 function showCalendar(month, year) {
-
     let firstDay = (new Date(year, month)).getDay();
-    // console.log(firstDay)
-
-    table = document.getElementById("calendar-body"); // body of the calendar
-
-    // clearing all previous cells
     table.innerHTML = "";
-
-
     monthAndYear.innerHTML = months[month] + " " + year;
-    // selectYear.value = year;
-    // selectMonth.value = month;
-
     // creating all cells
     let date = 1;
     for (let i = 0; i < 6; i++) {
@@ -73,47 +58,48 @@ function showCalendar(month, year) {
         }
         table.appendChild(row); // appending each row into calendar body.
     }
-    // var selectedTd = todayDay;
+}
 
-    var td = document.querySelectorAll("td");
-    var taskCount = 0;
-    var spanCounter = document.createElement('span');
-    spanCounter.className = "counter";
+var td = document.querySelectorAll("td");
+var taskCount = 0;
+var spanCounter = document.createElement('span');
+spanCounter.className = "counter";
 
-    var tasksArray = [];
-    var task = new Task();
-    var currentTdValue;
-    
-    for(let i = 0; i < td.length; i++) {
-        td[i].addEventListener('click', function () {
-            currentTdValue = this.innerHTML;
-            taskCount++;
-            spanCounter.innerHTML = taskCount;
-            task = new Task(prompt("Name"), this.innerHTML, today.getDay());
-            tasksArray.push(task);
-            this.classList.add("task-true");
-            this.appendChild(spanCounter);
+var tasksArray = [];
+var task = new Task();
+var currentTdValue;
+var idPart = today.getFullYear();
 
-            if(task.id == (today.getDay())){
-                localStorage.setItem(task.name, task.id);
-                this.setAttribute(id, task.id);
-                console.log( this.setAttribute(id, task.id));
-            } else {
-                console.log("Error");
-            }
-            console.log(tasksArray);
-        });
+table.onclick = function(event) {
+    var target = event.target;
+    currentTdValue = parseInt(target.innerHTML);
+    if (target.tagName != 'TD') {
+        return;
+    } else {
+        taskCount++;
+        spanCounter.innerHTML = taskCount;
+        task = new Task(prompt("Name"), today, (idPart + currentTdValue));
+        tasksArray.push(task);
 
-    }
-    
-    table.onclick = function(event) {
-        var target = event.target;
-        
-        
-        if (target.tagName != 'TD') {
-            selectedTd.classList.remove('highlight');
+        if((task.id - currentTdValue) == (today.getFullYear())){
+            task.id = (idPart + currentTdValue);
+            localStorage.setItem(task.name, parseInt(target.innerHTML));
+            target.classList.add("task-true");
+            target.appendChild(spanCounter);
+            console.log(parseInt(target.innerHTML));
+            console.log("Success");
+
+        } else {
+            localStorage.setItem(task.name, task.id);
+            console.log("Error");
         }
-    };
+        console.log(tasksArray);
+
+    
+    }
+};
+    
+   
 
     // function highlight(node) {
     //     if (selectedTd) {
@@ -124,7 +110,8 @@ function showCalendar(month, year) {
     //     }
     // }
 
-}
+
+
 
 
 function daysInMonth(iMonth, iYear) {
