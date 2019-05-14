@@ -28,12 +28,14 @@ function showCalendar(month, year) {
     let firstDay = (new Date(year, month)).getDay();
     table.innerHTML = "";
     monthAndYear.innerHTML = months[month] + " " + year;
+
+   
     // creating all cells
     let date = 1;
     for (let i = 0; i < 6; i++) {
         // create a table row
         let row = document.createElement("tr");
-
+        
         for (let j = 1; j < 8; j++) {
             if (i === 0 && j < firstDay) {
                 cell = document.createElement("td");
@@ -43,27 +45,29 @@ function showCalendar(month, year) {
             }
             else if ( date > daysInMonth(month, year)) {
                 break;
-            }
-
-            else {
+            } else {
                 cell = document.createElement("td");
                 cellTextCurrent = document.createTextNode(date);
+                
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("bg-info");
                 } // color today's date
                 cell.appendChild(cellTextCurrent);
                 row.appendChild(cell);
                 date++;
+                // Set id attribute for all day in month
+                cell.setAttribute("id", (currentYear + "" + currentMonth + "" + date-1));
             }
         }
         table.appendChild(row); // appending each row into calendar body.
     }
+    
 }
 
 var td = document.querySelectorAll("td");
-var taskCount = 0;
+var taskCount;
 var spanCounter = document.createElement('span');
-spanCounter.className = "counter";
+    spanCounter.className = "counter";
 
 var tasksArray = [];
 var task = new Task();
@@ -74,33 +78,38 @@ table.onclick = function(event) {
     var target = event.target;
     currentTdValue = parseInt(target.innerHTML);
     if (target.tagName == 'TD') {
-        taskCount++;
-        spanCounter.innerHTML = taskCount;
-        task = new Task(prompt("Name"), today, (idPart + currentTdValue));
+        task = new Task(target.getAttribute("id"), today, prompt("Name"));
         tasksArray.push(task);
-
-        if((task.id - currentTdValue) == (today.getFullYear())){
-            task.id = (idPart + currentTdValue);
-            localStorage.setItem(task.name, parseInt(target.innerHTML));
-            target.classList.add("task-true");
-            target.appendChild(spanCounter);
-            console.log(parseInt(target.innerHTML));
-            console.log("Success");
-
+        
+        if(task.id == target.getAttribute("id")){
+            localStorage.setItem( task.id, JSON.stringify(tasksArray));
+           
+            let currentTasks = []
+            // let stringTask = localStorage.getItem();
+            for(let i = 0; i <= td.length - 1; i++){
+                let currentId = td[i].getAttribute('id');
+                currentTasks.push(tasksArray.filter(key => key.id == currentId)); 
+            }
+            
+            let myStorage = window.localStorage;
+            console.log(myStorage)
+            // if(stringTask != null){
+            //     target.classList.add("task-true");
+            //     taskCount = currentTasks.length;
+            //     spanCounter.innerHTML = taskCount;
+            //     target.appendChild(spanCounter);
+            // }
         } else {
-            localStorage.setItem(task.name, task.id);
+            // localStorage.setItem( task.id, JSON.stringify(tasksArray));
             console.log("Error");
         }
-        console.log(tasksArray);
     } else {
-       var nextTable = document.getElementById("table");
+       var nextTable = document.getElementById("calendar");
        console.log("Click");
     }
 };
-    
-   
 
-    // function highlight(node) {
+// function highlight(node) {
     //     if (selectedTd) {
     //         selectedTd.classList.remove('highlight');
     //     } else {
@@ -109,20 +118,13 @@ table.onclick = function(event) {
     //     }
     // }
 
-
-
-
-
 function daysInMonth(iMonth, iYear) {
     return 33 - new Date(iYear, iMonth, 33).getDate();
 }
-var table = document.getElementById("calendar"); // body of the calendar
-function createTask(){
 
-}
-
-function Task(name, date, id) {
-    this.name = name;
-    this.date = date;
+// create task object
+function Task(id, date, name) {
     this.id = id;
+    this.date = date;
+    this.name = name;
 }
