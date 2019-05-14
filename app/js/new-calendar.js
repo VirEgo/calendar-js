@@ -78,31 +78,43 @@ table.onclick = function(event) {
     var target = event.target;
     currentTdValue = parseInt(target.innerHTML);
     if (target.tagName == 'TD') {
-        task = new Task(target.getAttribute("id"), today, prompt("Name"));
-        tasksArray.push(task);
+        task = new Task(target.getAttribute("id"), prompt("Name"));
         
-        if(task.id == target.getAttribute("id")){
-            localStorage.setItem( task.id, JSON.stringify(tasksArray));
-           
-            let currentTasks = []
-            // let stringTask = localStorage.getItem();
-            for(let i = 0; i <= td.length - 1; i++){
-                let currentId = td[i].getAttribute('id');
-                currentTasks.push(tasksArray.filter(key => key.id == currentId)); 
-            }
-            
-            let myStorage = window.localStorage;
-            console.log(myStorage)
-            // if(stringTask != null){
-            //     target.classList.add("task-true");
-            //     taskCount = currentTasks.length;
-            //     spanCounter.innerHTML = taskCount;
-            //     target.appendChild(spanCounter);
-            // }
-        } else {
-            // localStorage.setItem( task.id, JSON.stringify(tasksArray));
-            console.log("Error");
+        if(localStorage.getItem("Tasks")){
+            let parseTasks = JSON.parse(localStorage.getItem("Tasks"));
+           tasksArray.push(task);
+            console.log(parseTasks);
         }
+        localStorage.setItem( task.id, JSON.stringify(tasksArray));
+        
+        
+        // if(task.id == target.getAttribute("id")){
+            // localStorage.setItem( task.id, JSON.stringify(tasksArray));
+           
+            // console.log("Success");
+
+            // for(let i = 0; i <= td.length; i++){
+            //     let currentId = td[i].getAttribute('id');
+            //     let stringTask = localStorage.getItem(currentId);
+            //     // let currentTasks = tasksArray.filter(key => key.id == currentId);
+            //     if(stringTask != null){
+            //         target.classList.add("task-true");
+            //         taskCount = currentTasks.length;
+            //         spanCounter.innerHTML = taskCount;
+            //         target.appendChild(spanCounter);
+            //         console.log(target)
+            //     }else {
+                   
+            //     }
+            // }
+
+        // } else {
+            // localStorage.setItem( task.id, JSON.stringify(tasksArray));
+        //     console.log("Error");
+        // }
+        
+        
+        console.log(tasksArray);
     } else {
        var nextTable = document.getElementById("calendar");
        console.log("Click");
@@ -123,8 +135,7 @@ function daysInMonth(iMonth, iYear) {
 }
 
 // create task object
-function Task(id, date, name) {
+function Task(id, name) {
     this.id = id;
-    this.date = date;
     this.name = name;
 }
