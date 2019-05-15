@@ -28,8 +28,7 @@ function showCalendar(month, year) {
     let firstDay = (new Date(year, month)).getDay();
     table.innerHTML = "";
     monthAndYear.innerHTML = months[month] + " " + year;
-
-   
+  
     // creating all cells
     let date = 1;
     for (let i = 0; i < 6; i++) {
@@ -60,32 +59,112 @@ function showCalendar(month, year) {
             }
         }
         table.appendChild(row); // appending each row into calendar body.
+        getTasks();
     }
     
 }
 
 var td = document.querySelectorAll("td");
-var taskCount;
+var taskCount = 0;
 var spanCounter = document.createElement('span');
     spanCounter.className = "counter";
 
 var tasksArray = [];
 var task = new Task();
-var currentTdValue;
+var currentTdValue = 0;
 var idPart = today.getFullYear();
 
-table.onclick = function(event) {
-    var target = event.target;
-    currentTdValue = parseInt(target.innerHTML);
-    if (target.tagName == 'TD') {
-        task = new Task(target.getAttribute("id"), prompt("Name"));
-        
-        if(localStorage.getItem("Tasks")){
-            let parseTasks = JSON.parse(localStorage.getItem("Tasks"));
-           tasksArray.push(task);
-            console.log(parseTasks);
+
+// create task object
+function Task(id, name) {
+    this.id = id;
+    this.name = name;
+}
+
+function createTask() {
+   task = new Task(target.getAttribute("id"), prompt("Name"));
+   tasksArray.push(task);
+   saveTasks();
+   return tasksArray;
+}
+function removeTask(index) {
+    tasksArray.splice(index, 1);
+    saveTasks();
+    return tasksArray;
+}
+
+function getTask(index) {
+    return tasksArray[index];
+}
+
+function saveTasks(){
+    let tasks = JSON.stringify(tasksArray);
+    localStorage.setItem("tasks", tasks)
+}
+
+// Get all tasks from localstarage
+function getTasks(){
+    let tasks = localStorage.getItem("tasks");
+    tasksArray = JSON.parse(tasks);
+    if(!tasksArray){
+        tasksArray = [];
+    }
+    return tasksArray;
+}
+
+// Count tasks in tasks array
+// function tasksCounter(){
+//     taskCount = obj.length;
+//     spanCounter.innerHTML = taskCount;
+//     element.appendChild(spanCounter);
+// }
+
+window.onload = function(){
+   let tasks = getTasks();
+   var allTd = [];
+   var dayId = [];
+   for(let i = 0; i < td.length; i++){
+    allTd[i] = td[i];
+   }
+
+    for(let i = 0; i<= allTd.length; i++){
+         dayId[i] = allTd[i].getAttribute("id");
+         let tasksInThisDay = tasks.filter(key => key.id == dayId[i]);
+        //  allTd[i].spanCounter = tasksInThisDay.length
+
+        if(dayId[i] != null && tasksInThisDay.length > 0) {
+            allTd[i].appendChild(spanCounter.innerHTML = tasksInThisDay.length);
         }
-        localStorage.setItem( task.id, JSON.stringify(tasksArray));
+    }
+}
+
+table.onclick = function(event) {
+    target = event.target;
+    currentTdValue = parseInt(target.innerHTML);
+    currentId = target.getAttribute("id");
+    if (target.tagName == 'TD') {
+        getTasks();
+        createTask();
+        saveTasks();
+         
+        let currentTasks = tasksArray.filter(key => key.id == currentId);
+        // if(stringTask != null){
+        //     target.classList.add("task-true");
+        //     taskCount = currentTasks.length;
+        //     spanCounter.innerHTML = taskCount;
+        //     target.appendChild(spanCounter);
+        //     console.log(target)
+        // }
+        
+        // if(localStorage.getItem("tasks")){
+        //     let parseTasks = JSON.parse(localStorage.getItem("Tasks"));
+        //     parseTasks.push(task);
+        //     console.log(typeof(parseTasks));
+        // } else {
+        //     let parseTasks = JSON.parse(localStorage.getItem("Tasks"));
+        //     localStorage.setItem( task.id, JSON.stringify(parseTasks));
+        //     console.log("else");
+        // }
         
         
         // if(task.id == target.getAttribute("id")){
@@ -96,7 +175,7 @@ table.onclick = function(event) {
             // for(let i = 0; i <= td.length; i++){
             //     let currentId = td[i].getAttribute('id');
             //     let stringTask = localStorage.getItem(currentId);
-            //     // let currentTasks = tasksArray.filter(key => key.id == currentId);
+            //     let currentTasks = tasksArray.filter(key => key.id == currentId);
             //     if(stringTask != null){
             //         target.classList.add("task-true");
             //         taskCount = currentTasks.length;
@@ -113,11 +192,6 @@ table.onclick = function(event) {
         //     console.log("Error");
         // }
         
-        
-        console.log(tasksArray);
-    } else {
-       var nextTable = document.getElementById("calendar");
-       console.log("Click");
     }
 };
 
@@ -134,8 +208,3 @@ function daysInMonth(iMonth, iYear) {
     return 33 - new Date(iYear, iMonth, 33).getDate();
 }
 
-// create task object
-function Task(id, name) {
-    this.id = id;
-    this.name = name;
-}
