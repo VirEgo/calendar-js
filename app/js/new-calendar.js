@@ -121,21 +121,49 @@ function getTasks(){
 
 window.onload = function(){
    let tasks = getTasks();
-   var allTd = [];
-   var dayId = [];
-   for(let i = 0; i < td.length; i++){
-    allTd[i] = td[i];
-   }
-
-    for(let i = 0; i<= allTd.length; i++){
-         dayId[i] = allTd[i].getAttribute("id");
-         let tasksInThisDay = tasks.filter(key => key.id == dayId[i]);
-        //  allTd[i].spanCounter = tasksInThisDay.length
-
-        if(dayId[i] != null && tasksInThisDay.length > 0) {
-            allTd[i].appendChild(spanCounter.innerHTML = tasksInThisDay.length);
+   var allTd = document.getElementsByTagName("td");
+   var dayId = 0;
+  
+   
+   for(let i = 0; i < allTd.length; i++){
+        dayId = allTd[i].getAttribute("id");
+    
+        if(dayId != null) {
+            let tasksInThisDay = tasks.filter(key => key.id == dayId);
+            debugger
+            dayId.innerHTML = tasksInThisDay.length;
+        } else {
+            
         }
-    }
+   
+}
+    console.log(dayId);
+    // console.log(tasks.getItem("id", dayId));
+    
+    
+    // allTd[i] = td[i];
+    // if(allTd[i].getAttribute("id") != null ) {
+    //     allTd[i].spanCounter = tasksInThisDay.length;
+    //     allTd[i].appendChild(spanCounter.innerHTML = tasksInThisDay.length);
+        // console.log(tasksInThisDay);
+        
+    
+    // if(dayId[i] == tasks.getItem("id") && dayId[i] != 0){
+    //     console.log("Success");
+    // }
+    
+//     for(let j = 0; j <= allTd.length; j++){
+//         dayId[j] = allTd[j].getAttribute("id");
+//         let tasksInThisDay = tasks.filter(key => key.id == dayId[i]);
+//        //  allTd[i].spanCounter = tasksInThisDay.length
+
+//        if(dayId[j] != null && tasksInThisDay.length > 0) {
+//            allTd[j].appendChild(spanCounter.innerHTML = tasksInThisDay.length);
+//        }
+//    }
+//    }
+
+    
 }
 
 table.onclick = function(event) {
