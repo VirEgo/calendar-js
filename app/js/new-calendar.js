@@ -123,22 +123,28 @@ window.onload = function(){
    let tasks = getTasks();
    var allTd = document.getElementsByTagName("td");
    var dayId = 0;
-  
+   dayId = function(allTd){
+        for(let i = 0; i <allTd.length; i++) {
+            console.log(allTd[i].id);
+            return allTd[i].id; 
+        }
+   };
    
    for(let i = 0; i < allTd.length; i++){
-        dayId = allTd[i].getAttribute("id");
-    
+       
         if(dayId != null) {
-            let tasksInThisDay = tasks.filter(key => key.id == dayId);
+            let tasksInThisDay = tasks.filter(function(dayId){
+                return tasks[i].id;
+            });
             debugger
-            dayId.innerHTML = tasksInThisDay.length;
-        } else {
+            console.log(tasksInThisDay);
             
         }
-   
+        // console.log(tasks[i].id);
+        // console.log(allTd[i].id);
 }
-    console.log(dayId);
-    // console.log(tasks.getItem("id", dayId));
+// console.log(tasks);
+    //  console.log(tasks.getItem("id", dayId));
     
     
     // allTd[i] = td[i];
